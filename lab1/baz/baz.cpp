@@ -1,6 +1,9 @@
 #include <iostream>
+#include <cmath>
 
 using namespace std;
+
+#define MAX(a, b) ((a > b) ? (a) : (b))
 
 constexpr int MAXN = 1000000;
 constexpr int MAXM = MAXN;
@@ -42,7 +45,16 @@ int main() {
             cout << s << endl;
             continue;
         }
+        if (n - k - 1 < 0) {
+            cout << "-1\n";
+            continue;
+        }
         long long maxS = -1;
+        if (oddRight[n - k] != -1 && evenLeft[n - k - 1] != -1)
+            maxS = MAX(maxS, s - oddRight[n - k] + evenLeft[n - k - 1]);
+        if (evenRight[n - k] != -1 && oddLeft[n - k - 1] != -1)
+            maxS = MAX(maxS, s - evenRight[n - k] + oddLeft[n - k - 1]);
+        cout << maxS << endl;
     }
     return 0;
 }
